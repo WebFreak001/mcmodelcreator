@@ -51,6 +51,8 @@ ModelCreator = (function() {
 
         this.element = this.three.renderer.domElement;
 
+        this.modelName = "";
+
         this.grid = [];
         for (var i = 0; i < 9; i++) {
             this.grid[i] = new THREE.GridHelper(8, 1);
@@ -140,6 +142,33 @@ ModelCreator = (function() {
 
             return newIndex;
         }
+    };
+
+    ModelCreator.prototype.save = function(name) {
+        name = name || this.modelName || "autosave";
+        var object = {
+            __name: name,
+            textures: this.textureVariables,
+            ambientocclusion: true,
+            display: { },
+            elements: []
+        };
+        for (var i = 0; i < this.elements.length; i++) {
+            object.elements.push(this.elements[i].serialize());
+        }
+        window.localStorage.setItem("model." + name, JSON.stringify(object));
+    };
+
+    ModelCreator.prototype.load = function(name) {
+        name = name || this.modelName || "autosave";
+        this.modelName = name;
+        var elements = [];
+        var serialized = JSON.parse(window.localStorage.getItem("model." + name) || "{\"elements\":[]}");
+        this.textureVariables = serialized.textures;
+        for (var i = 0; i < serialized.elements.length; i++) {
+            elements.push(ModelCreator.Element.deserialize(serialized.elements[i]));
+        }
+        this.elements = elements;
     };
 
     ModelCreator.Element = (function() {
@@ -584,4 +613,32 @@ $("#btnDup").on("click", function() {
 
     updateElementList();
     updateControls();
+});
+$("#btnSave").on("click", function() {
+    manualSave();
+});
+
+function manualSave() {
+    if (!mc.modelName) {
+        while (true) {
+            mc.modelName = prompt("Enter model name");
+            if (window.localStorage.getItem("model." + mc.modelName)) {
+                if (confirm("A model with this name already exists. Overwrite it?"))
+                    break;
+                else
+                    continue;
+            }
+            break;
+        }
+    }
+    mc.save();
+}
+
+setInterval(mc.save.bind(mc), 5000); // TODO: Make interval changable
+
+$(window).on("keydown", function(e) {
+    if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+        e.preventDefault();
+        manualSave();
+    }
 });
