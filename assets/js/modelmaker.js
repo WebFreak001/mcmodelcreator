@@ -176,7 +176,11 @@ ModelCreator = (function() {
             this.geometry = new THREE.BoxGeometry(this.size.x, this.size.y, this.size.z);
 
             this.geometry.applyMatrix(
-                new THREE.Matrix4().makeTranslation(8, 8, 8)
+                new THREE.Matrix4().makeTranslation(this.size.x * 0.5, this.size.y * 0.5, this.size.z * 0.5)
+            );
+
+            this.geometry.applyMatrix(
+                new THREE.Matrix4().makeTranslation(-8, -8, -8)
             );
 
             this.geometry.applyMatrix(
@@ -189,13 +193,9 @@ ModelCreator = (function() {
                 new THREE.Matrix4().makeRotationZ(Element.toRad(this.rotation.z))
             );
 
-            // this.geometry.applyMatrix(
-            //     new THREE.Matrix4().makeTranslation(
-            //         -(8 - (this.size.x / 2)),
-            //         -(8 - (this.size.y / 2)),
-            //         -(8 - (this.size.z / 2))
-            //     )
-            // );
+            this.geometry.applyMatrix(
+                new THREE.Matrix4().makeTranslation(8, 8, 8)
+            );
 
             if (setMesh) {
                 this.mesh.geometry = this.geometry;
