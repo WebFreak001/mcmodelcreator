@@ -145,13 +145,15 @@ ModelCreator = (function() {
          *
          * @param {THREE.Vector3} size
          * @param {THREE.Vector3} position
+         * @param {THREE.Vector3} rotation
+         * @param {THREE.Vector3} origin
          * @constructor
          */
-        function Element(size, position, rotation) {
-            this.size = size;
-            this.position = position;
-            this.rotation = rotation;
-            this.origin = new THREE.Vector3();
+        function Element(size, position, rotation, origin) {
+            this.size = size || new THREE.Vector3();
+            this.position = position || new THREE.Vector3();
+            this.rotation = rotation || new THREE.Vector3();
+            this.origin = origin || new THREE.Vector3();
             this.name = "Unnamed Element";
 
             this.createGeometry(false);
@@ -167,6 +169,32 @@ ModelCreator = (function() {
 
         Element.toRad = function(deg) {
             return deg * (Math.PI / 180);
+        };
+        
+        Element.deserialize = function(object) {
+            var name = object.__name || "Unnamed Element";
+            var position = object.from || [0, 0, 0];
+            var to = object.to || [0, 0, 0];
+            var size = [to[0] - position[0], to[1] - position[1], to[2] - position[2]];
+            var rotation = [0, 0, 0];
+            var origin = [8, 8, 8];
+            if (object.rotation) {
+                if (object.rotation.axis == "x")
+                    rotation[0] = object.rotation.angle;
+                else if (object.rotation.axis == "y")
+                    rotation[1] = object.rotation.angle;
+                else if (object.rotation.axis == "z")
+                    rotation[2] = object.rotation.angle;
+                origin = object.rotation.origin || [8, 8, 8];
+            }
+            var element = new Element(
+                new THREE.Vector3(size[0], size[1], size[2]),
+                new THREE.Vector3(position[0], position[1], position[2]),
+                new THREE.Vector3(rotation[0], rotation[1], rotation[2]),
+                new THREE.Vector3(origin[0], origin[1], origin[2])
+            );
+            element.name = name;
+            return element;
         };
 
         /**
@@ -240,6 +268,43 @@ ModelCreator = (function() {
         Element.prototype.setOrigin = function(origin) {
             this.origin = origin;
             this.createGeometry(true);
+        };
+        
+        Element.prototype.serialize = function() {
+            return {
+                __name: this.name,
+                from: [this.position.x, this.position.y, this.position.z],
+                to: [this.position.x + this.size.x, this.position.y + this.size.y, this.position.z + this.size.z],
+                rotation: this.serializeRotation(),
+                shade: true, // TODO: make changable
+                faces: { // TODO: make changable
+                    down: { uv: [0, 0, 16, 16], texture: "#particle", cullface: undefined, rotation: 0, tintIndex: 0 },
+                    up: { uv: [0, 0, 16, 16], texture: "#particle", cullface: undefined, rotation: 0, tintIndex: 0 },
+                    north: { uv: [0, 0, 16, 16], texture: "#particle", cullface: undefined, rotation: 0, tintIndex: 0 },
+                    south: { uv: [0, 0, 16, 16], texture: "#particle", cullface: undefined, rotation: 0, tintIndex: 0 },
+                    west: { uv: [0, 0, 16, 16], texture: "#particle", cullface: undefined, rotation: 0, tintIndex: 0 },
+                    east: { uv: [0, 0, 16, 16], texture: "#particle", cullface: undefined, rotation: 0, tintIndex: 0 }
+                }
+            };
+        };
+        
+        Element.prototype.serializeRotation = function() {
+            if (this.rotation.x)
+                return this.makeRotation("x", this.rotation.x);
+            if (this.rotation.y)
+                return this.makeRotation("y", this.rotation.y);
+            if (this.rotation.z)
+                return this.makeRotation("z", this.rotation.z);
+            return undefined;
+        };
+        
+        Element.prototype.makeRotation = function(axis, angle) {
+            return {
+                origin: [this.origin.x, this.origin.y, this.origin.z],
+                axis: axis,
+                angle: angle,
+                rescale: false // TODO: make changable
+            }
         };
 
         return Element;
