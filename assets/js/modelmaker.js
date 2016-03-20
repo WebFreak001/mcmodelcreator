@@ -49,26 +49,26 @@ ModelCreator = (function() {
 
         this.element = this.three.renderer.domElement;
 
-        this.workspaces = [];
+        this.grid = [];
         for (var i = 0; i < 9; i++) {
-            this.workspaces[i] = new THREE.GridHelper(8, 1);
+            this.grid[i] = new THREE.GridHelper(8, 1);
             if (i > 0) {
-                this.workspaces[i].setColors(0xDDDDDD, 0xDDDDDD);
+                this.grid[i].setColors(0xDDDDDD, 0xDDDDDD);
             } else {
-                this.workspaces[i].setColors(0x888888, 0x888888);
+                this.grid[i].setColors(0x888888, 0x888888);
             }
-            this.three.scene.add(this.workspaces[i]);
+            this.three.scene.add(this.grid[i]);
         }
 
-        this.workspaces[0].position.set(8, 0, 8);
-        this.workspaces[1].position.set(-8, 0, 8);
-        this.workspaces[2].position.set(-8, 0, 24);
-        this.workspaces[3].position.set(8, 0, 24);
-        this.workspaces[4].position.set(24, 0, 24);
-        this.workspaces[5].position.set(24, 0, 8);
-        this.workspaces[6].position.set(24, 0, -8);
-        this.workspaces[7].position.set(8, 0, -8);
-        this.workspaces[8].position.set(-8, 0, -8);
+        this.grid[0].position.set(8, 0, 8);
+        this.grid[1].position.set(-8, 0, 8);
+        this.grid[2].position.set(-8, 0, 24);
+        this.grid[3].position.set(8, 0, 24);
+        this.grid[4].position.set(24, 0, 24);
+        this.grid[5].position.set(24, 0, 8);
+        this.grid[6].position.set(24, 0, -8);
+        this.grid[7].position.set(8, 0, -8);
+        this.grid[8].position.set(-8, 0, -8);
 
         this.three.axis.position.set(0, 0.01, 0);
         this.three.scene.add(this.three.axis);
