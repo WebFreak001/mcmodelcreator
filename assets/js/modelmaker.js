@@ -233,7 +233,7 @@ ModelCreator = (function() {
          * @param {boolean} setMesh
          */
         Element.prototype.createGeometry = function(setMesh) {
-            this.geometry = new THREE.BoxGeometry(this.size.x, this.size.y, this.size.z);
+            this.geometry = new MCBlockGeometry(this.size.x, this.size.y, this.size.z);
 
             this.geometry.applyMatrix(
                 new THREE.Matrix4().makeTranslation(this.size.x * 0.5, this.size.y * 0.5, this.size.z * 0.5)
