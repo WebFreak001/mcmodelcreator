@@ -59,70 +59,114 @@
                                 <label for="elemName" class="control-label">Name</label>
                                 <input type="text" class="form-control" id="elemName" disabled />
                             </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <div class="form-group">
-                                        <label for="elemSizeX" class="control-label">Size X</label>
-                                        <input type="text" class="form-control" id="elemSizeX" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="elemSizeY" class="control-label">Size Y</label>
-                                        <input type="text" class="form-control" id="elemSizeY" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="elemSizeZ" class="control-label">Size Z</label>
-                                        <input type="text" class="form-control" id="elemSizeZ" disabled />
-                                    </div>
-                                </div>
 
-                                <div class="col-xs-4">
-                                    <div class="form-group">
-                                        <label for="elemPosX" class="control-label">Position X</label>
-                                        <input type="text" class="form-control" id="elemPosX" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="elemPosY" class="control-label">Position Y</label>
-                                        <input type="text" class="form-control" id="elemPosY" disabled />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="elemPosZ" class="control-label">Position Z</label>
-                                        <input type="text" class="form-control" id="elemPosZ" disabled />
-                                    </div>
-                                </div>
+                            <h4>X Axis</h4>
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemSizeX" class="control-label">Size</label>
+                                            <input type="text" class="form-control" id="elemSizeX" disabled />
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemPosX" class="control-label">Position</label>
+                                            <input type="text" class="form-control" id="elemPosX" disabled />
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemRotX" class="control-label">Rotation</label>
+                                            <select class="form-control" id="elemRotX" disabled>
+                                                <option value="-45">-45</option>
+                                                <option value="-22.5">-22.5</option>
+                                                <option value="0" selected>0</option>
+                                                <option value="22.5">22.5</option>
+                                                <option value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemRotX" class="control-label">Origin</label>
+                                            <input type="text" class="form-control" id="elemOriX" disabled />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
 
-                                <div class="col-xs-4">
-                                    <div class="form-group">
-                                        <label for="elemRotX" class="control-label">Rotation X</label>
-                                        <select class="form-control" id="elemRotX" disabled>
-                                            <option value="-45">-45</option>
-                                            <option value="-22.5">-22.5</option>
-                                            <option value="0" selected>0</option>
-                                            <option value="22.5">22.5</option>
-                                            <option value="45">45</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="elemRotY" class="control-label">Rotation Y</label>
-                                        <select class="form-control" id="elemRotY" disabled>
-                                            <option value="-45">-45</option>
-                                            <option value="-22.5">-22.5</option>
-                                            <option value="0" selected>0</option>
-                                            <option value="22.5">22.5</option>
-                                            <option value="45">45</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="elemRotZ" class="control-label">Rotation Z</label>
-                                        <select class="form-control" id="elemRotZ" disabled>
-                                            <option value="-45">-45</option>
-                                            <option value="-22.5">-22.5</option>
-                                            <option value="0" selected>0</option>
-                                            <option value="22.5">22.5</option>
-                                            <option value="45">45</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                            <h4>Y Axis</h4>
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemSizeY" class="control-label">Size</label>
+                                            <input type="text" class="form-control" id="elemSizeY" disabled />
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemPosY" class="control-label">Position</label>
+                                            <input type="text" class="form-control" id="elemPosY" disabled />
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemRotY" class="control-label">Rotation</label>
+                                            <select class="form-control" id="elemRotY" disabled>
+                                                <option value="-45">-45</option>
+                                                <option value="-22.5">-22.5</option>
+                                                <option value="0" selected>0</option>
+                                                <option value="22.5">22.5</option>
+                                                <option value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemOriY" class="control-label">Origin</label>
+                                            <input type="text" class="form-control" id="elemOriY" disabled />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h4>Z Axis</h4>
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemSizeZ" class="control-label">Size</label>
+                                            <input type="text" class="form-control" id="elemSizeZ" disabled />
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemPosZ" class="control-label">Position</label>
+                                            <input type="text" class="form-control" id="elemPosZ" disabled />
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemRotZ" class="control-label">Rotation</label>
+                                            <select class="form-control" id="elemRotZ" disabled>
+                                                <option value="-45">-45</option>
+                                                <option value="-22.5">-22.5</option>
+                                                <option value="0" selected>0</option>
+                                                <option value="22.5">22.5</option>
+                                                <option value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td style="width: 25%; padding: 2px;">
+                                        <div class="form-group">
+                                            <label for="elemOriZ" class="control-label">Origin</label>
+                                            <input type="text" class="form-control" id="elemOriZ" disabled />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
