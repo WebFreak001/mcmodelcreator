@@ -9,8 +9,8 @@ ModelCreator = (function() {
         this.three = {
             scene: new THREE.Scene(),
             camera: new THREE.PerspectiveCamera(75, this.size.width / this.size.height, 0.1, 1000),
-            // renderer: (this.isWebGlAvailable() ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer()),
-            renderer: new THREE.CanvasRenderer(),
+            renderer: (this.isWebGlAvailable() ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer()),
+            // renderer: new THREE.CanvasRenderer(),
             lights: [],
             axis: new THREE.AxisHelper(16)
         };
