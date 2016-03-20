@@ -266,7 +266,7 @@ $("#elemSizeY").on("change keydown keyup", function() {
         );
     }
 });
-$("#elemSizeZ").on("change keydown keydown", function() {
+$("#elemSizeZ").on("change keydown keyup", function() {
     if (currentElement != null) {
         mc.elements[currentElement].setSize(
             new THREE.Vector3(
