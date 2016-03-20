@@ -151,6 +151,7 @@ ModelCreator = (function() {
             this.size = size;
             this.position = position;
             this.rotation = rotation;
+            this.origin = new THREE.Vector3();
             this.name = "Unnamed Element";
 
             this.createGeometry(false);
@@ -230,6 +231,14 @@ ModelCreator = (function() {
         Element.prototype.setRotation = function(rotation) {
             this.rotation = rotation;
             this.createGeometry(true);
+        };
+
+        /**
+         *
+         * @param {THREE.Vector3} origin
+         */
+        Element.prototype.setOrigin = function(origin) {
+            this.origin = origin;
         };
 
         return Element;
@@ -357,6 +366,39 @@ $("#elemRotZ").on("change keydown keyup", function() {
         updateRotations();
     }
 });
+$("#elemOriX").on("change keydown keyup", function() {
+    if (currentElement != null) {
+        mc.elements[currentElement].setOrigin(
+            new THREE.Vector3(
+                parseFloat($("#elemOriX").val()),
+                mc.elements[currentElement].origin.y,
+                mc.elements[currentElement].origin.z
+            )
+        );
+    }
+});
+$("#elemOriY").on("change keydown keyup", function() {
+    if (currentElement != null) {
+        mc.elements[currentElement].setOrigin(
+            new THREE.Vector3(
+                mc.elements[currentElement].origin.x,
+                parseFloat($("#elemOriY").val()),
+                mc.elements[currentElement].origin.z
+            )
+        );
+    }
+});
+$("#elemOriZ").on("change keydown keyup", function() {
+    if (currentElement != null) {
+        mc.elements[currentElement].setOrigin(
+            new THREE.Vector3(
+                mc.elements[currentElement].origin.x,
+                mc.elements[currentElement].origin.y,
+                parseFloat($("#elemOriZ").val())
+            )
+        );
+    }
+});
 
 function updateRotations() {
     if (currentElement != null) {
@@ -389,6 +431,9 @@ function updateControls() {
         $("#elemRotX").prop("disabled", false);
         $("#elemRotY").prop("disabled", false);
         $("#elemRotZ").prop("disabled", false);
+        $("#elemOriX").prop("disabled", false);
+        $("#elemOriY").prop("disabled", false);
+        $("#elemOriZ").prop("disabled", false);
 
         $("#elemName").val(mc.elements[currentElement].name);
         $("#elemSizeX").val(mc.elements[currentElement].size.x);
@@ -400,6 +445,9 @@ function updateControls() {
         $("#elemRotX").val(mc.elements[currentElement].mesh.rotation.x);
         $("#elemRotY").val(mc.elements[currentElement].mesh.rotation.y);
         $("#elemRotZ").val(mc.elements[currentElement].mesh.rotation.z);
+        $("#elemOriX").val(mc.elements[currentElement].origin.x);
+        $("#elemOriY").val(mc.elements[currentElement].origin.y);
+        $("#elemOriZ").val(mc.elements[currentElement].origin.z);
 
         updateRotations();
     } else {
@@ -424,6 +472,9 @@ function updateControls() {
         $("#elemRotX").val(0);
         $("#elemRotY").val(0);
         $("#elemRotZ").val(0);
+        $("#elemOriX").val(null);
+        $("#elemOriY").val(null);
+        $("#elemOriZ").val(null);
     }
 }
 
