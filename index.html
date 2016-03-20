@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Model Creator</title>
+
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+        <!--<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" />-->
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>
+                    Model Creator
+                    <small>Easily create Minecraft block models.</small>
+                </h1>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Editor</div>
+                        <div class="panel-body">
+                            <div id="editor">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button class="btn btn-default">New</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-default">Save</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Elements</div>
+                        <div class="panel-body">
+                            <select id="lstElements" multiple size="5"></select>
+                        </div>
+                        <div class="panel-footer">
+                            <button id="btnNew" class="btn btn-sm btn-success">New</button>
+                            <button id="btnRem" class="btn btn-sm btn-danger">Remove</button>
+                            <button id="btnDup" class="btn btn-sm btn-warning">Duplicate</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Controls</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="elemName" class="control-label">Name</label>
+                                <input type="text" class="form-control" id="elemName" disabled />
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label for="elemSizeX" class="control-label">Size X</label>
+                                        <input type="text" class="form-control" id="elemSizeX" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="elemSizeY" class="control-label">Size Y</label>
+                                        <input type="text" class="form-control" id="elemSizeY" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="elemSizeZ" class="control-label">Size Z</label>
+                                        <input type="text" class="form-control" id="elemSizeZ" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label for="elemPosX" class="control-label">Position X</label>
+                                        <input type="text" class="form-control" id="elemPosX" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="elemPosY" class="control-label">Position Y</label>
+                                        <input type="text" class="form-control" id="elemPosY" disabled />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="elemPosZ" class="control-label">Position Z</label>
+                                        <input type="text" class="form-control" id="elemPosZ" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label for="elemRotX" class="control-label">Rotation X</label>
+                                        <select class="form-control" id="elemRotX" disabled>
+                                            <option value="-45">-45</option>
+                                            <option value="-22.5">-22.5</option>
+                                            <option value="0" selected>0</option>
+                                            <option value="22.5">22.5</option>
+                                            <option value="45">45</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="elemRotY" class="control-label">Rotation Y</label>
+                                        <select class="form-control" id="elemRotY" disabled>
+                                            <option value="-45">-45</option>
+                                            <option value="-22.5">-22.5</option>
+                                            <option value="0" selected>0</option>
+                                            <option value="22.5">22.5</option>
+                                            <option value="45">45</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="elemRotZ" class="control-label">Rotation Z</label>
+                                        <select class="form-control" id="elemRotZ" disabled>
+                                            <option value="-45">-45</option>
+                                            <option value="-22.5">-22.5</option>
+                                            <option value="0" selected>0</option>
+                                            <option value="22.5">22.5</option>
+                                            <option value="45">45</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/three.min.js"></script>
+        <script type="text/javascript" src="assets/js/three.OrbitControls.js"></script>
+        <script type="text/javascript" src="assets/js/modelmaker.js"></script>
+    </body>
+</html>
