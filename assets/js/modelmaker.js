@@ -181,7 +181,7 @@ ModelCreator = (function() {
             );
 
             this.geometry.applyMatrix(
-                new THREE.Matrix4().makeTranslation(-8, -8, -8)
+                new THREE.Matrix4().makeTranslation(-this.origin.x, -this.origin.y, -this.origin.z)
             );
 
             this.geometry.applyMatrix(
@@ -195,7 +195,7 @@ ModelCreator = (function() {
             );
 
             this.geometry.applyMatrix(
-                new THREE.Matrix4().makeTranslation(8, 8, 8)
+                new THREE.Matrix4().makeTranslation(this.origin.x, this.origin.y, this.origin.z)
             );
 
             if (setMesh) {
@@ -239,6 +239,7 @@ ModelCreator = (function() {
          */
         Element.prototype.setOrigin = function(origin) {
             this.origin = origin;
+            this.createGeometry(true);
         };
 
         return Element;
