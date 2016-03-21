@@ -17,6 +17,17 @@
                 </h1>
             </div>
 
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <button class="btn btn-default">New</button>
+                </div>
+                <div class="btn-group">
+                    <button id="btnSave" class="btn btn-default">Save</button>
+                </div>
+            </div>
+
+            <hr />
+
             <div class="row">
                 <div class="col-xs-8">
                     <div class="panel panel-default">
@@ -30,20 +41,13 @@
                 </div>
 
                 <div class="col-xs-4">
-                    <div class="btn-toolbar">
-                        <div class="btn-group">
-                            <button class="btn btn-default">New</button>
-                        </div>
-                        <div class="btn-group">
-                            <button id="btnSave" class="btn btn-default">Save</button>
-                        </div>
-                    </div>
-
-                    <hr />
-
                     <div class="panel panel-default">
                         <div class="panel-heading">Elements</div>
                         <div class="panel-body">
+                            <div class="form-group">
+                                <label for="elemName" class="control-label">Name</label>
+                                <input type="text" class="form-control" id="elemName" disabled />
+                            </div>
                             <select id="lstElements" multiple size="5" style="width: 100%"></select>
                         </div>
                         <div class="panel-footer">
@@ -53,120 +57,181 @@
                         </div>
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading">Controls</div>
+                        <!--<div class="panel-heading">Controls</div>-->
                         <div class="panel-body">
-                            <div class="form-group">
-                                <label for="elemName" class="control-label">Name</label>
-                                <input type="text" class="form-control" id="elemName" disabled />
+                            <ul class="nav nav-tabs" style="margin-bottom: 16px;" role="tablist">
+                                <li role="presentation">
+                                    <a href="#tab-general" role="tab">General</a>
+                                </li>
+                                <li role="presentation" class="active">
+                                    <a href="#tab-display" role="tab">Display</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane" id="tab-general">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>X</th>
+                                                <th>Y</th>
+                                                <th>Z</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    Size
+                                                </th>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemSizeX" disabled />
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemSizeY" disabled />
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemSizeZ" disabled />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+                                                    Position
+                                                </th>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemPosX" disabled />
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemPosY" disabled />
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemPosZ" disabled />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+                                                    Rotation
+                                                </th>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <select class="form-control" id="elemRotX" disabled>
+                                                        <option value="-45">-45&deg;</option>
+                                                        <option value="-22.5">-22.5&deg;</option>
+                                                        <option value="0" selected>0&deg;</option>
+                                                        <option value="22.5">22.5&deg;</option>
+                                                        <option value="45">45&deg;</option>
+                                                    </select>
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <select class="form-control" id="elemRotY" disabled>
+                                                        <option value="-45">-45&deg;</option>
+                                                        <option value="-22.5">-22.5&deg;</option>
+                                                        <option value="0" selected>0&deg;</option>
+                                                        <option value="22.5">22.5&deg;</option>
+                                                        <option value="45">45&deg;</option>
+                                                    </select>
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <select class="form-control" id="elemRotZ" disabled>
+                                                        <option value="-45">-45&deg;</option>
+                                                        <option value="-22.5">-22.5&deg;</option>
+                                                        <option value="0" selected>0&deg;</option>
+                                                        <option value="22.5">22.5&deg;</option>
+                                                        <option value="45">45&deg;</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>
+                                                    Origin
+                                                </th>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemOriX" disabled />
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemOriY" disabled />
+                                                </td>
+                                                <td style="width: 25%; padding: 2px;">
+                                                    <input type="text" class="form-control" id="elemOriZ" disabled />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane active" id="tab-display">
+                                    <div class="form-group">
+                                        <label>Face</label>
+                                        <select id="selFace" class="form-control" disabled>
+                                            <option value="up">Up</option>
+                                            <option value="down">Down</option>
+                                            <option value="north">North</option>
+                                            <option value="south">South</option>
+                                            <option value="west">West</option>
+                                            <option value="east">East</option>
+                                        </select>
+                                    </div>
+
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 25%;">Visible</th>
+                                                <td colspan="4" style="padding: 2px;">
+                                                    <input id="chkFaceVisible" type="checkbox" disabled />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>UV</th>
+                                                <td style="padding: 2px;">
+                                                    <input id="numFaceUvX" class="form-control" type="number" disabled />
+                                                </td>
+                                                <td style="padding: 2px;">
+                                                    <input id="numFaceUvY" class="form-control" type="number" disabled />
+                                                </td>
+                                                <td style="padding: 2px;">
+                                                    <input id="numFaceUvW" class="form-control" type="number" disabled />
+                                                </td>
+                                                <td style="padding: 2px;">
+                                                    <input id="numFaceUvH" class="form-control" type="number" disabled />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Texture</th>
+                                                <td colspan="4" style="padding: 2px;">
+                                                    <select id="selFaceTexture" class="form-control" disabled></select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Rotation</th>
+                                                <td colspan="4" style="padding: 2px;">
+                                                    <select id="selFaceTextureRot" class="form-control" disabled>
+                                                        <option value="0">0&deg;</option>
+                                                        <option value="90">90&deg;</option>
+                                                        <option value="180">180&deg;</option>
+                                                        <option value="270">270&deg;</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Cull Face</th>
+                                                <td colspan="4" style="padding: 2px;">
+                                                    <select id="selFaceCull" class="form-control" disabled>
+                                                        <option value="up">Up</option>
+                                                        <option value="down">Down</option>
+                                                        <option value="north">North</option>
+                                                        <option value="south">South</option>
+                                                        <option value="west">West</option>
+                                                        <option value="east">East</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
-                            <h4>X Axis</h4>
-                            <table border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemSizeX" class="control-label">Size</label>
-                                            <input type="text" class="form-control" id="elemSizeX" disabled />
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemPosX" class="control-label">Position</label>
-                                            <input type="text" class="form-control" id="elemPosX" disabled />
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemRotX" class="control-label">Rotation</label>
-                                            <select class="form-control" id="elemRotX" disabled>
-                                                <option value="-45">-45</option>
-                                                <option value="-22.5">-22.5</option>
-                                                <option value="0" selected>0</option>
-                                                <option value="22.5">22.5</option>
-                                                <option value="45">45</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemRotX" class="control-label">Origin</label>
-                                            <input type="text" class="form-control" id="elemOriX" disabled />
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <h4>Y Axis</h4>
-                            <table border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemSizeY" class="control-label">Size</label>
-                                            <input type="text" class="form-control" id="elemSizeY" disabled />
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemPosY" class="control-label">Position</label>
-                                            <input type="text" class="form-control" id="elemPosY" disabled />
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemRotY" class="control-label">Rotation</label>
-                                            <select class="form-control" id="elemRotY" disabled>
-                                                <option value="-45">-45</option>
-                                                <option value="-22.5">-22.5</option>
-                                                <option value="0" selected>0</option>
-                                                <option value="22.5">22.5</option>
-                                                <option value="45">45</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemOriY" class="control-label">Origin</label>
-                                            <input type="text" class="form-control" id="elemOriY" disabled />
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <h4>Z Axis</h4>
-                            <table border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemSizeZ" class="control-label">Size</label>
-                                            <input type="text" class="form-control" id="elemSizeZ" disabled />
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemPosZ" class="control-label">Position</label>
-                                            <input type="text" class="form-control" id="elemPosZ" disabled />
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemRotZ" class="control-label">Rotation</label>
-                                            <select class="form-control" id="elemRotZ" disabled>
-                                                <option value="-45">-45</option>
-                                                <option value="-22.5">-22.5</option>
-                                                <option value="0" selected>0</option>
-                                                <option value="22.5">22.5</option>
-                                                <option value="45">45</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="width: 25%; padding: 2px;">
-                                        <div class="form-group">
-                                            <label for="elemOriZ" class="control-label">Origin</label>
-                                            <input type="text" class="form-control" id="elemOriZ" disabled />
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
                         </div>
                     </div>
                 </div>
