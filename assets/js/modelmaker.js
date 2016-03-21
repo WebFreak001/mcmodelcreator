@@ -618,6 +618,14 @@ $("#btnSave").on("click", function() {
     manualSave();
 });
 
+/** TABS */
+
+$(".nav-tabs a").click(function() {
+   $(this).tab("show");
+});
+
+/** SAVING */
+
 function manualSave() {
     if (!mc.modelName) {
         while (true) {
