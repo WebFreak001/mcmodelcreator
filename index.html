@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mcmodelcreator">
     <head>
         <meta charset="UTF-8">
         <title>Model Creator</title>
 
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
         <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />-->
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" ng-controller="ModelController as editor">
             <div class="page-header">
                 <h1>
                     Model Creator
@@ -22,7 +23,7 @@
                     <button class="btn btn-default">New</button>
                 </div>
                 <div class="btn-group">
-                    <button id="btnSave" class="btn btn-default">Save</button>
+                    <button ng-click="editor.save()" class="btn btn-default">Save</button>
                 </div>
             </div>
 
@@ -34,7 +35,6 @@
                         <div class="panel-heading">Editor</div>
                         <div class="panel-body">
                             <div id="editor">
-
                             </div>
                         </div>
                     </div>
@@ -46,14 +46,21 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="elemName" class="control-label">Name</label>
-                                <input type="text" class="form-control" id="elemName" disabled />
+                                <input type="text" class="form-control" ng-model="editor.selected().name" ng-disabled="!editor.validSelection()" />
                             </div>
-                            <select id="lstElements" multiple size="5" style="width: 100%"></select>
+                            <div class="list-group">
+                                <button ng-repeat="element in editor.elements" ng-click="editor.elementIndex = $index" type="button" class="list-group-item" ng-class="{active:$index==editor.elementIndex}">
+                                    {{element.name}}
+                                    <div class="pull-right">
+                                        <i class="fa fa-remove" ng-click="editor.removeElement($index)"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <p>Valid: {{editor.validSelection()}}</p>
                         </div>
                         <div class="panel-footer">
-                            <button id="btnNew" class="btn btn-sm btn-success">New</button>
-                            <button id="btnRem" class="btn btn-sm btn-danger">Remove</button>
-                            <button id="btnDup" class="btn btn-sm btn-warning">Duplicate</button>
+                            <button ng-click="editor.newElement()" class="btn btn-sm btn-success">New</button>
+                            <button ng-click="editor.duplicateSelected()" class="btn btn-sm btn-warning">Duplicate</button>
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -70,96 +77,98 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane" id="tab-general">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>X</th>
-                                                <th>Y</th>
-                                                <th>Z</th>
-                                            </tr>
-                                        </thead>
+                                    <fieldset ng-disabled="!editor.validSelection()">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>X</th>
+                                                    <th>Y</th>
+                                                    <th>Z</th>
+                                                </tr>
+                                            </thead>
 
-                                        <tbody>
-                                            <tr>
-                                                <th>
-                                                    Size
-                                                </th>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemSizeX" disabled />
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemSizeY" disabled />
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemSizeZ" disabled />
-                                                </td>
-                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        Size
+                                                    </th>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().sizeX" />
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().sizeY" />
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().sizeZ" />
+                                                    </td>
+                                                </tr>
 
-                                            <tr>
-                                                <th>
-                                                    Position
-                                                </th>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemPosX" disabled />
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemPosY" disabled />
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemPosZ" disabled />
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <th>
+                                                        Position
+                                                    </th>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().positionX" />
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().positionY" />
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().positionZ" />
+                                                    </td>
+                                                </tr>
 
-                                            <tr>
-                                                <th>
-                                                    Rotation
-                                                </th>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <select class="form-control" id="elemRotX" disabled>
-                                                        <option value="-45">-45&deg;</option>
-                                                        <option value="-22.5">-22.5&deg;</option>
-                                                        <option value="0" selected>0&deg;</option>
-                                                        <option value="22.5">22.5&deg;</option>
-                                                        <option value="45">45&deg;</option>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <select class="form-control" id="elemRotY" disabled>
-                                                        <option value="-45">-45&deg;</option>
-                                                        <option value="-22.5">-22.5&deg;</option>
-                                                        <option value="0" selected>0&deg;</option>
-                                                        <option value="22.5">22.5&deg;</option>
-                                                        <option value="45">45&deg;</option>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <select class="form-control" id="elemRotZ" disabled>
-                                                        <option value="-45">-45&deg;</option>
-                                                        <option value="-22.5">-22.5&deg;</option>
-                                                        <option value="0" selected>0&deg;</option>
-                                                        <option value="22.5">22.5&deg;</option>
-                                                        <option value="45">45&deg;</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <th>
+                                                        Rotation
+                                                    </th>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <select class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().rotationX" ng-disabled="!editor.selected().canRotateX()">
+                                                            <option value="-45">-45&deg;</option>
+                                                            <option value="-22.5">-22.5&deg;</option>
+                                                            <option value="0" selected>0&deg;</option>
+                                                            <option value="22.5">22.5&deg;</option>
+                                                            <option value="45">45&deg;</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <select class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().rotationY" ng-disabled="!editor.selected().canRotateY()">
+                                                            <option value="-45">-45&deg;</option>
+                                                            <option value="-22.5">-22.5&deg;</option>
+                                                            <option value="0" selected>0&deg;</option>
+                                                            <option value="22.5">22.5&deg;</option>
+                                                            <option value="45">45&deg;</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <select class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().rotationZ" ng-disabled="!editor.selected().canRotateZ()">
+                                                            <option value="-45">-45&deg;</option>
+                                                            <option value="-22.5">-22.5&deg;</option>
+                                                            <option value="0" selected>0&deg;</option>
+                                                            <option value="22.5">22.5&deg;</option>
+                                                            <option value="45">45&deg;</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
 
-                                            <tr>
-                                                <th>
-                                                    Origin
-                                                </th>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemOriX" disabled />
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemOriY" disabled />
-                                                </td>
-                                                <td style="width: 25%; padding: 2px;">
-                                                    <input type="text" class="form-control" id="elemOriZ" disabled />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                <tr>
+                                                    <th>
+                                                        Origin
+                                                    </th>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().originX" />
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().originY" />
+                                                    </td>
+                                                    <td style="width: 25%; padding: 2px;">
+                                                        <input type="text" class="form-control" ng-model-options="{getterSetter:true}" ng-model="editor.selected().originZ" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
                                 </div>
 
                                 <div class="tab-pane active" id="tab-display">
@@ -238,9 +247,9 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="assets/js/three.min.js"></script>
         <script type="text/javascript" src="assets/js/three.Projector.js"></script>
         <script type="text/javascript" src="assets/js/three.CanvasRenderer.js"></script>
