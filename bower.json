@@ -1,0 +1,23 @@
+{
+  "name": "mcmodelcreator",
+  "homepage": "https://github.com/technocf/mcmodelcreator",
+  "authors": [
+    "technocf",
+    "WebFreak001"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.2"
+  }
+}
